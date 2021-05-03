@@ -11,4 +11,3 @@ try:
     print(avg)
 except FileNotFoundError:
     print("A megadott fájl nem található.")
-test
