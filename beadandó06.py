@@ -1,17 +1,6 @@
 import sys
 import matplotlib.pyplot as plt
 import numpy as np
-import random
-# def szingeneralas(n):
-#     szinek=[]
-#     while n!=0:
-#         random_number = random.randint(0, 16777215)
-#         hex_number = str(hex(random_number))
-#         hex_number = '#' + hex_number[2:]
-#         hex_number=str(hex_number)
-#         szinek.append(hex_number)
-#         n-=1
-#     return szinek
 def inttealakitas(ls):
     newls=[]
     for i in ls:
