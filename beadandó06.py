@@ -1,7 +1,22 @@
 import sys
 import matplotlib.pyplot as plt
 import numpy as np
-
+import random
+def szingeneralas(n):
+    szinek=[]
+    while n!=0:
+        random_number = random.randint(0, 16777215)
+        hex_number = str(hex(random_number))
+        hex_number = '#' + hex_number[2:]
+        hex_number=str(hex_number)
+        szinek.append(hex_number)
+        n-=1
+    return szinek
+def inttealakitas(ls):
+    newls=[]
+    for i in ls:
+        newls.append(int(i))
+    return newls
 
 try:
 
@@ -56,9 +71,23 @@ try:
                     atl.append((matrix[0,i],atlag))
             atl.sort(key=lambda tup: tup[1], reverse=True)
             atl=atl[:n]
-            print(atl)
-
-
+            mydict={}
+            for i in range(n):
+                mydict["ls"+str(i)]=[]
+            for i in range(n):
+                for osz in range(oszam):
+                    for sor in range(sorszam):
+                        if osz>0 and sor>0:
+                            if matrix[0,osz]==atl[i][0]:
+                                mydict["ls"+str(i)].append(matrix[sor,osz])
+            x=[]
+            for i in range(len(mydict["ls0"])):
+                x.append(i)
+            szinek = szingeneralas(n)
+            for i in range(n):
+                plt.plot(x,inttealakitas(mydict["ls"+str(i)]),color=szinek[i],label=atl[i][0])
+                plt.legend()
+            plt.show()
             fin.close()
 
 except FileNotFoundError:
