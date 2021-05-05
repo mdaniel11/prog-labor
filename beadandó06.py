@@ -2,16 +2,16 @@ import sys
 import matplotlib.pyplot as plt
 import numpy as np
 import random
-def szingeneralas(n):
-    szinek=[]
-    while n!=0:
-        random_number = random.randint(0, 16777215)
-        hex_number = str(hex(random_number))
-        hex_number = '#' + hex_number[2:]
-        hex_number=str(hex_number)
-        szinek.append(hex_number)
-        n-=1
-    return szinek
+# def szingeneralas(n):
+#     szinek=[]
+#     while n!=0:
+#         random_number = random.randint(0, 16777215)
+#         hex_number = str(hex(random_number))
+#         hex_number = '#' + hex_number[2:]
+#         hex_number=str(hex_number)
+#         szinek.append(hex_number)
+#         n-=1
+#     return szinek
 def inttealakitas(ls):
     newls=[]
     for i in ls:
@@ -29,6 +29,8 @@ try:
         ev = int(lsinput[0])
         if ev<2005 or ev>2015:
             print("Csak 2005 és 2015 közötti adatokat tud feldolgozni.")
+        elif n>20:
+            print("Csak 20 megyénk van.")
         else:
             fin = open(sys.argv[1], "r")
             elsosor = fin.readline()
@@ -83,12 +85,17 @@ try:
             x=[]
             for i in range(len(mydict["ls0"])):
                 x.append(i)
-            szinek = szingeneralas(n)
+            szinek = ["green","goldenrod","blue","black","orange","red","purple","pink","brown","cyan","teal","crimson","grey","magenta","yellow","darkblue","lime","lavender","turquoise","ivory"]
             for i in range(n):
                 plt.plot(x,inttealakitas(mydict["ls"+str(i)]),color=szinek[i],label=atl[i][0])
                 plt.legend()
+            plt.xlabel(f"Hetek száma {ev}-ben/ban.")
+            plt.ylabel("Fertőzések száma/hét.")
+            plt.title(f"Bárányhimlő esetek {ev}-ben/ban abban az {n} megyénkben, ahol az éves átlag a legmagasabb volt.")
             plt.show()
             fin.close()
 
 except FileNotFoundError:
     print("A megadott fájl nem található.")
+except IndexError:
+    print("Csak 2005 és 2015 között dolgozható fel az adat és csak 20 megyénk van.")
