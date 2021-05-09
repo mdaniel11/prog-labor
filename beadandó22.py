@@ -21,7 +21,19 @@ def szoras(ls):
         if len(lsparatlan)<2:
             print(f"A(z) {i+1}.sor páratlan számainak nem lehet kiszámolni a szórását.")
             lsparatlan.clear()
-        if len(lsparos)>=2 or len(lsparatlan)>=2:
+        if len(lsparos)>=2 and len(lsparatlan)<2:
+            lsszorasparos = np.nanstd(lsparos)
+            lsparos.clear()
+            print(f"{i + 1}.sor\n"
+                  f"Páros számok szórása: {lsszorasparos:2.2f} Páratlan számok szórása: nem lehet kiszámolni.\n"
+                  f"Számjegyek összege (legnagyobb helyiértékek): {sum}")
+        elif len(lsparos)<2 and len(lsparatlan)>=2:
+            lsszorasparatlan = np.nanstd(lsparatlan)
+            lsparatlan.clear()
+            print(f"{i + 1}.sor\n"
+                  f"Páros számok szórása: nem lehet kiszámolni. Páratlan számok szórása: {lsszorasparatlan:.2f}\n"
+                  f"Számjegyek összege (legnagyobb helyiértékek): {sum}")
+        elif len(lsparos)>=2 and len(lsparatlan)>=2:
             lsszorasparos=np.nanstd(lsparos)
             lsszorasparatlan=np.nanstd(lsparatlan)
             lsparatlan.clear()
